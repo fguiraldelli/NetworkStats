@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -38,6 +39,8 @@ public class StatsActivity extends AppCompatActivity {
     TextView networkStatsAllTx;
     TextView networkStatsPackageRx;
     TextView networkStatsPackageTx;
+
+    final static String TAG = "STATS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +149,8 @@ public class StatsActivity extends AppCompatActivity {
         networkStatsAllRx.setText(mobileWifiRx + " B");
         long mobileWifiTx = networkStatsHelper.getAllTxBytesMobile(this) + networkStatsHelper.getAllTxBytesWifi();
         networkStatsAllTx.setText(mobileWifiTx + " B");
+        Log.d(TAG, "networkStatsAllRx: " + mobileWifiRx);
+        Log.d(TAG, "networkStatsAllTx: " + mobileWifiTx);
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -154,16 +159,22 @@ public class StatsActivity extends AppCompatActivity {
         networkStatsPackageRx.setText(mobileWifiRx + " B");
         long mobileWifiTx = networkStatsHelper.getPackageTxBytesMobile(this) + networkStatsHelper.getPackageTxBytesWifi();
         networkStatsPackageTx.setText(mobileWifiTx + " B");
+        Log.d(TAG, "networkStatsPackageRx: " + mobileWifiRx);
+        Log.d(TAG, "networkStatsPackageTx: " + mobileWifiTx);
     }
 
     private void fillTrafficStatsAll() {
         trafficStatsAllRx.setText(TrafficStatsHelper.getAllRxBytes() + " B");
         trafficStatsAllTx.setText(TrafficStatsHelper.getAllTxBytes() + " B");
+        Log.d(TAG, "trafficStatsAllRx: " + TrafficStatsHelper.getAllRxBytes());
+        Log.d(TAG, "trafficStatsAllTx: " + TrafficStatsHelper.getAllTxBytes());
     }
 
     private void fillTrafficStatsPackage(int uid) {
         trafficStatsPackageRx.setText(TrafficStatsHelper.getPackageRxBytes(uid) + " B");
         trafficStatsPackageTx.setText(TrafficStatsHelper.getPackageTxBytes(uid) + " B");
+        Log.d(TAG, "trafficStatsAllRx: " + TrafficStatsHelper.getPackageRxBytes(uid));
+        Log.d(TAG, "trafficStatsAllTx: " + TrafficStatsHelper.getPackageTxBytes(uid));
     }
 
     private boolean hasPermissionToReadPhoneStats() {
